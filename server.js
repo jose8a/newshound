@@ -1,8 +1,9 @@
 // ===================================================
 // -- Base
 // ===================================================
-//xx-- require('dotenv').config();
+require('dotenv').config();
 var express = require('express');
+var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var path = require('path');
@@ -107,10 +108,10 @@ app.use(function(error, req, res, next) {
 // ===================================================
 // -- Start Listening for Requests
 // ===================================================
-var port = (process.env.PORT | '3500');
+var port = (process.env.PORT || '3550');
 
 //listener = app.listen(process.env.PORT, function () {
 listener = app.listen(port, function () {
-  console.log('PORT ' + app.get('port') + ': UP --> Now Taking Requests!');
+  console.log('PORT ' + this.address().port + ': UP --> Now Taking Requests!');
 });
 
