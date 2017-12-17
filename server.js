@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var path = require('path');
 var Promise = require('bluebird');
+var handleErrors = require('./app/middlewares/error-handler');
 var faviconHandler = require('./app/middlewares/favicon');
 
 // ===================================================
@@ -50,47 +51,13 @@ app.get('/', function (req, res) {
 });
 
 
+console.log('env: ' + app.get('env'));
+
 // == FAVICON ========================================
 app.use(faviconHandler);
 
-// ===================================================
-// -- Client Error Handlers
-// --   404 Handler
-// ===================================================
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-
-// ===================================================
-// -- Server Error Handlers
-// ===================================================
-// Development
-// Allow Stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(error, req, res, next) {
-    console.log('dev - 500 error');
-
-    res.status(error.status || 500).json({
-      message: error.message,
-      error: error
-    });
-  });
-}
-
-// Production
-// Remove Stacktrace
-app.use(function(error, req, res, next) {
-  console.log('prod - 500 error');
-
-  res.status(error.status || 500).json({
-    message: error.message,
-    error: {}
-  });
-});
-
+// == ERRORS =========================================
+handleErrors(app);
 
 // ===================================================
 // -- Start Listening for Requests
