@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var path = require('path');
 var Promise = require('bluebird');
+var faviconHandler = require('./app/middlewares/favicon');
 
 // ===================================================
 // -- Set Up the Bare Application Object
@@ -35,7 +36,6 @@ app.use(methodOverride());
 // -- VIEWS
 // ===================================================
 var hbs  = require('express-handlebars');
-
 app.engine('handlebars', hbs({defaultLayout: 'main'}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
@@ -50,20 +50,8 @@ app.get('/', function (req, res) {
 });
 
 
-// ===================================================
-// -- Client Favicon Request
-// --   simply returns a header
-// --   from: https://gist.github.com/kentbrew/763822
-// ===================================================
-app.use(function(req, res, next) {
-  // control for favicon
-  if (req.url === '/favicon.ico') {
-    res.writeHead(200, {'Content-Type': 'image/x-icon'} );
-    res.end();
-    console.log('favicon requested');
-    return;
-  }
-});
+// == FAVICON ========================================
+app.use(faviconHandler);
 
 // ===================================================
 // -- Client Error Handlers
