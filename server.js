@@ -24,13 +24,12 @@ app.use(helmet());
 // ===================================================
 // -- DEFAULTS
 // ===================================================
-var helloMessage = "Hello, Mundo!";
-
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(cookieParser());
+app.use(methodOverride());
 
 // ===================================================
 // -- VIEWS
