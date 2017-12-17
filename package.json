@@ -1,0 +1,53 @@
+{
+  "//1": "describes your app and its dependencies",
+  "//2": "https://docs.npmjs.com/files/package.json",
+  "//3": "updating this file will download and update your packages",
+  "name": "my-hyperdev-app",
+  "version": "0.0.1",
+  "description": "What am I about?",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "body-parser": "^1.15.2",
+    "bookshelf": "^0.10.0",
+    "cheerio": "*",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.7.1",
+    "csurf": "^1.9.0",
+    "date-fns": "^1.29.0",
+    "debug": "^2.2.0",
+    "express": "^5.0.0-alpha.2",
+    "express-handlebars": "^3.0.0",
+    "firebase": "^3.2.1",
+    "helmet": "^2.1.2",
+    "knex": "^0.11.10",
+    "knockout": "^3.4.0",
+    "morgan": "^1.7.0",
+    "request": "*",
+    "serve-favicon": "^2.3.0",
+    "sqlite3": "^3.1.4",
+    "twit": "^2.2.4",
+    "vue": "^1.0.26",
+    "vue-cli": "^2.2.0",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "*"
+  },
+  "engines": {
+    "node": "4.4.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://hyperdev.com/#!/project/welcome-project"
+  },
+  "keywords": [
+    "node",
+    "hyperdev",
+    "express"
+  ],
+  "license": "MIT"
+}
