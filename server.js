@@ -41,6 +41,10 @@ app.engine('handlebars', hbs({defaultLayout: 'main'}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
+// == ROUTERS ========================================
+var routers = require('./app/routes');
+routers(app, express);
+
 // ===================================================
 // -- ROUTES
 // ===================================================
