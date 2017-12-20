@@ -9,7 +9,7 @@
 // '/tech/perf-rocks'   -- Returns all the stories available from Perf-Rocks front page
 //
 // =================================================================
-// --- let fetchFEFStories = require("../parsers/feFrontParser");
+let fetchFEFStories = require("../parsers/feFrontParser");
 let fetchEchoStories = require("../parsers/echoParser");
 let fetchCSSTricksStories = require("../parsers/cssTricksParser");
 // --- let fetchDevToStories = require("../parsers/devToParser");
@@ -32,8 +32,8 @@ module.exports = function(router) {
   // get list of all stories available on FEFront front-page
   router.get('/fefront', (req, res, next) => {
     console.log("FEFRONT ARTICLES - path: '/tech/fefront'");
-    res.status(200).send('TODO: Implementation not yet complete.');
-    // --- fetchFEFStories(req, res);
+    // --- res.status(200).send('TODO: Implementation not yet complete.');
+    fetchFEFStories(req, res);
   });
 
   // get list of all stories available on EchoJS front-page
