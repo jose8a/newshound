@@ -10,8 +10,8 @@
 //
 // =================================================================
 // --- let fetchFEFStories = require("../parsers/feFrontParser");
-// --- let fetchEchoStories = require("../parsers/echoParser");
-fetchCSSTricksStories = require("../parsers/cssTricksParser");
+let fetchEchoStories = require("../parsers/echoParser");
+let fetchCSSTricksStories = require("../parsers/cssTricksParser");
 // --- let fetchDevToStories = require("../parsers/devToParser");
 // --- let fetchScotchStories = require("../parsers/scotchParser");
 // --- let fetchPerfRocksStories = require("../parsers/perfRocksParser");
@@ -39,14 +39,13 @@ module.exports = function(router) {
   // get list of all stories available on EchoJS front-page
   router.get('/echo', (req, res, next) => {
     console.log("ECHO ARTICLES - path: '/tech/echo'");
-    res.status(200).send('TODO: Implementation not yet complete.');
-    // --- fetchEchoStories(req, res);
+    // --- res.status(200).send('TODO: Implementation not yet complete.');
+    fetchEchoStories(req, res);
   });
 
   // get list of all stories available on CSS Tricks front-page
   router.get('/css-tricks', (req, res, next) => {
     console.log("CSS TRICKS ARTICLES - path: '/tech/css-tricks'");
-    // --- res.status(200).send('TODO: Implementation not yet complete.');
     fetchCSSTricksStories(req, res);
   });
 
