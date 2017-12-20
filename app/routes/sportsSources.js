@@ -7,6 +7,7 @@
 //
 // =================================================================
 let fetchRingerStories = require("../parsers/ringerParser");
+let fetchSIStories = require("../parsers/sicomParser");
 
 module.exports = function(router) {
   // get a collection of all my available stories from all sources
@@ -24,14 +25,14 @@ module.exports = function(router) {
   // get list of all stories available on The Ringer front-page
   router.get('/the-ringer', (req, res, next) => {
     console.log("THE RINGER STORIES - path: '/sports/the-ringer'");
-    // --- res.status(200).json({source: 'the-ringer', stories: ["tbd1", "tbd2"]});
     fetchRingerStories(req, res);
   });
 
   // get list of all stories available on SI.com front-page
   router.get('/si-com', (req, res, next) => {
     console.log("SI-COM STORIES - path: '/sports/si-com'");
-    res.status(200).json({source: 'si-com', stories: ["tbd1", "tbd2"]});
+    fetchSIStories(req, res);
+    // --- res.status(200).json({source: 'si-com', stories: ["tbd1", "tbd2"]});
   });
 
   // get list of all stories available on SBNation front-page
