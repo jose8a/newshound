@@ -12,7 +12,7 @@
 let fetchFEFStories = require("../parsers/feFrontParser");
 let fetchEchoStories = require("../parsers/echoParser");
 let fetchCSSTricksStories = require("../parsers/cssTricksParser");
-// --- let fetchDevToStories = require("../parsers/devToParser");
+let fetchDevToStories = require("../parsers/devToParser");
 // --- let fetchScotchStories = require("../parsers/scotchParser");
 // --- let fetchPerfRocksStories = require("../parsers/perfRocksParser");
 
@@ -52,8 +52,8 @@ module.exports = function(router) {
   // get list of all stories available on DevTo front-page
   router.get('/dev-to', (req, res, next) => {
     console.log("DEVTO ARTICLES - path: '/tech/dev-to'");
-    res.status(200).send('TODO: Implementation not yet complete.');
-    // --- fetchDevToStories(req, res);
+    // --- res.status(200).send('TODO: Implementation not yet complete.');
+    fetchDevToStories(req, res);
   });
 
   // get list of all stories available on ScotchIO front-page
