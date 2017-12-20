@@ -14,7 +14,7 @@ let fetchEchoStories = require("../parsers/echoParser");
 let fetchCSSTricksStories = require("../parsers/cssTricksParser");
 let fetchDevToStories = require("../parsers/devToParser");
 // --- let fetchScotchStories = require("../parsers/scotchParser");
-// --- let fetchPerfRocksStories = require("../parsers/perfRocksParser");
+let fetchPerfRocksStories = require("../parsers/perfRocksParser");
 
 module.exports = function(router) {
   // get a collection of all my available stories from all sources
@@ -32,14 +32,12 @@ module.exports = function(router) {
   // get list of all stories available on FEFront front-page
   router.get('/fefront', (req, res, next) => {
     console.log("FEFRONT ARTICLES - path: '/tech/fefront'");
-    // --- res.status(200).send('TODO: Implementation not yet complete.');
     fetchFEFStories(req, res);
   });
 
   // get list of all stories available on EchoJS front-page
   router.get('/echo', (req, res, next) => {
     console.log("ECHO ARTICLES - path: '/tech/echo'");
-    // --- res.status(200).send('TODO: Implementation not yet complete.');
     fetchEchoStories(req, res);
   });
 
@@ -52,7 +50,6 @@ module.exports = function(router) {
   // get list of all stories available on DevTo front-page
   router.get('/dev-to', (req, res, next) => {
     console.log("DEVTO ARTICLES - path: '/tech/dev-to'");
-    // --- res.status(200).send('TODO: Implementation not yet complete.');
     fetchDevToStories(req, res);
   });
 
@@ -66,7 +63,7 @@ module.exports = function(router) {
   // get list of all stories available on Perf-Rocks front-page
   router.get('/perf-rocks', (req, res, next) => {
     console.log("PERF-ROCKS ARTICLES - path: '/tech/perf-rocks'");
-    res.status(200).send('TODO: Implementation not yet complete.');
-    // --- fetchPerfRocksStories(req, res);
+    // --- res.status(200).send('TODO: Implementation not yet complete.');
+    fetchPerfRocksStories(req, res);
   });
 };
