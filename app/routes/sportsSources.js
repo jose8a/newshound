@@ -8,6 +8,7 @@
 // =================================================================
 let fetchRingerStories = require("../parsers/ringerParser");
 let fetchSIStories = require("../parsers/sicomParser");
+let fetchSBNationStories = require("../parsers/sbnationParser");
 
 module.exports = function(router) {
   // get a collection of all my available stories from all sources
@@ -32,13 +33,12 @@ module.exports = function(router) {
   router.get('/si-com', (req, res, next) => {
     console.log("SI-COM STORIES - path: '/sports/si-com'");
     fetchSIStories(req, res);
-    // --- res.status(200).json({source: 'si-com', stories: ["tbd1", "tbd2"]});
   });
 
   // get list of all stories available on SBNation front-page
   router.get('/sbnation', (req, res, next) => {
     console.log("SBNATION STORIES - path: '/sports/sbnation'");
-    res.status(200).json({source: 'sbnation', stories: ["tbd1", "tbd2"]});
+    fetchSBNationStories(req, res);
   });
 };
 
