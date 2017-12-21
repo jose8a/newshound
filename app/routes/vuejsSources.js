@@ -7,7 +7,7 @@
 //
 // =================================================================
 let fetchVueDevStories = require("../parsers/vueDevParser");
-// --- let fetchVueGatorStories = require("../parsers/vueGatorParser");
+let fetchVueGatorStories = require("../parsers/vueGatorParser");
 // --- let fetchVueRedditStories = require("../parsers/vueRedditParser");
 
 module.exports = function(router) {
@@ -33,8 +33,8 @@ module.exports = function(router) {
   // get list of all stories available on Alligator front-page
   router.get('/gator', (req, res, next) => {
     console.log("ALLIGATOR VUE ARTICLES - path: '/vue/gator'");
-    // --- fetchVueGatorStories(req, res);
-    res.status(200).send('Endpoint (GATOR) not yet implemented.');
+    fetchVueGatorStories(req, res);
+    // --- res.status(200).send('Endpoint (GATOR) not yet implemented.');
   });
 
   // get list of all stories available on Reddit/r/vuejs front-page
