@@ -1,9 +1,10 @@
 let format = require('date-fns/format');
 
 NewsItemParser = {
-  init: function(typeSelector, linkSelector, source) {
+  init: function(typeSelector, linkSelector, source, linkType) {
     this.storyProperties = {};
 
+    this.linkType = linkType || 'inner';
     this.source = source;
     this.linkSelector = linkSelector;
     this.collectionSelector = typeSelector;
@@ -16,6 +17,15 @@ NewsItemParser = {
   },
   getCollectionSelector: function() {
     return this.collectionSelector;
+  },
+  getLinkItem: function(itemContainer, linkSelector) {
+    // if type === 'inner', the link is embedded in the item container,
+    //    else, it is attached to the itemContainer itself
+    if (this.linkType === 'inner') {
+      return itemContainer.find(linkSelector);
+    }
+
+    return itemContainer;
   },
   parseItem: function(itemContainer, linkItem, rank) {
     // make sure to start with an empy object when parsing a news item
