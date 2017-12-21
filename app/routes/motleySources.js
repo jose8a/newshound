@@ -7,7 +7,7 @@
 //
 // =================================================================
 // --- let fetchHNewsStories = require("../parsers/hnewsParser");
-// --- let fetchReutersStories = require("../parsers/reutersParser");
+let fetchReutersStories = require("../parsers/reutersParser");
 // --- let fetchMediumTopStories = require("../parsers/mediumTopParser");
 
 module.exports = function(router) {
@@ -33,8 +33,8 @@ module.exports = function(router) {
   // get list of all stories available on EchoJS front-page
   router.get('/reuters', (req, res, next) => {
     console.log("REUTERS ARTICLES - path: '/motley/reuters'");
-    // --- fetchReutersStories(req, res);
-    res.status(200).send('Endpoint (REUTERS) not yet implemented.');
+    fetchReutersStories(req, res);
+    // --- res.status(200).send('Endpoint (REUTERS) not yet implemented.');
   });
 
   // get list of all stories available on CSS Tricks front-page
