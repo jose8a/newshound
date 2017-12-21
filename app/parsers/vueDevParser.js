@@ -18,7 +18,7 @@ let vuedevsPropertiesExtractor = {
   extractRank: function(itemContainer, linkItem, rank) {
     console.log("boom!");
     return rank;
-  },
+  }
 }
 
 // 2. create a vuedevsItemParser from the generic newsItemParser in
