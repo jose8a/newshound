@@ -8,7 +8,7 @@
 // =================================================================
 let fetchVueDevStories = require("../parsers/vueDevParser");
 let fetchVueGatorStories = require("../parsers/vueGatorParser");
-// --- let fetchVueRedditStories = require("../parsers/vueRedditParser");
+let fetchVueRedditStories = require("../parsers/vueRedditParser");
 
 module.exports = function(router) {
   // get a collection of all my available stories from all sources
@@ -40,8 +40,8 @@ module.exports = function(router) {
   // get list of all stories available on Reddit/r/vuejs front-page
   router.get('/reddit', (req, res, next) => {
     console.log("VUE REDDIT ARTICLES - path: '/vue/reddit'");
-    // --- fetchVueRedditStories(req, res);
-    res.status(200).send('Endpoint (REDDIT) not yet implemented.');
+    fetchVueRedditStories(req, res);
+    // --- res.status(200).send('Endpoint (REDDIT) not yet implemented.');
   });
 };
 
