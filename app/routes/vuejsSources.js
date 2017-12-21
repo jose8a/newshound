@@ -6,7 +6,7 @@
 // '/vue/reddit'      -- Returns all the stories available from Reddit/r/vuejs front page
 //
 // =================================================================
-// --- let fetchVueDevStories = require("../parsers/vueDevParser");
+let fetchVueDevStories = require("../parsers/vueDevParser");
 // --- let fetchVueGatorStories = require("../parsers/vueGatorParser");
 // --- let fetchVueRedditStories = require("../parsers/vueRedditParser");
 
@@ -26,8 +26,8 @@ module.exports = function(router) {
   // get list of all stories available on Vuejsdevelopers front-page
   router.get('/vuedevs', (req, res, next) => {
     console.log("VUEJSDEVELOPERS ARTICLES - path: '/vue/vuedevs'");
-    // --- fetchVueDevStories(req, res);
-    res.status(200).send('Endpoint (VUEDEVS) not yet implemented.');
+    fetchVueDevStories(req, res);
+    // --- res.status(200).send('Endpoint (VUEDEVS) not yet implemented.');
   });
 
   // get list of all stories available on Alligator front-page
