@@ -21,7 +21,15 @@ NewsItemParser = {
   getLinkItem: function(itemContainer, linkSelector) {
     // if type === 'inner', the link is embedded in the item container,
     //    else, it is attached to the itemContainer itself
+    let urlAnchor = itemContainer.find(linkSelector);
+
     if (this.linkType === 'inner') {
+      // if linkSelector is not found within itemContainer, skip the
+      // current list item.
+      if (!urlAnchor.attr("href")) {
+        return null;
+      }
+
       return itemContainer.find(linkSelector);
     }
 
