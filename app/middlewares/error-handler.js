@@ -14,7 +14,7 @@ var handle404 = function(req, res, next) {
 // Allow Stacktrace
 var handleDev5xx = function(error, req, res, next) {
   var status = error.status || 500;
-  res.status(status).json('error', {
+  res.status(status).json({
     "message": error.message,
     "error": error
   });
@@ -25,7 +25,7 @@ var handleDev5xx = function(error, req, res, next) {
 // Remove Stacktrace
 var handleProd5xx = function(error, req, res, next) {
   var status = error.status || 500;
-  res.status(status).json('error', {
+  res.status(status).json({
     message: error.message,
     error: {}
   });
