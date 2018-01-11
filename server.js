@@ -19,9 +19,23 @@ var app = express();
 // ===================================================
 // -- Security
 // ===================================================
+var cors = require('cors');
 var csrf = require('csurf');                // TODO: logic
 var helmet = require('helmet');
+
+var whitelist = ['http://localhost:7080', 'http://localhost:3500'];
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+};
+
 app.use(helmet());
+app.use(cors(corsOptions));
 
 // ===================================================
 // -- DEFAULTS
