@@ -4,23 +4,25 @@
 // '/sports/the-ringer'   -- Returns all the stories available from The Ringer front page
 // '/sports/si-com'       -- Returns all the stories available from SI.com front page
 // '/sports/sbnation'     -- Returns all the stories available from SBNation front page
+// '/sports/sbn-card'     -- Returns all the stories available from Rule of Tree front page
 //
 // =================================================================
 let fetchRingerStories = require("../parsers/ringerParser");
 let fetchSIStories = require("../parsers/sicomParser");
 let fetchSBNationStories = require("../parsers/sbnationParser");
+let fetchSBNCardinalStories = require("../parsers/sbnCardParser");
 
 module.exports = function(router) {
   // get a collection of all my available stories from all sources
   router.get('/', (req, res, next) => {
     console.log("ALL AVAILABLE SPORTS STORIES - path: '/sports/'");
-    res.status(200).json({stories: {sicom: "tbd", sbnation: "tbd", ringer: "tbd"}});
+    res.status(200).json({stories: {sicom: "tbd", sbnation: "tbd", ringer: "tbd", sbncard: "tbd"}});
   });
 
   // get list of all available news sources
   router.get('/list', (req, res, next) => {
     console.log("ALL AVAILABLE SOURCES - path: '/sports/list'");
-    res.status(200).json({sources: ['the-ringer', 'si-com', 'sbnation']});
+    res.status(200).json({sources: ['the-ringer', 'si-com', 'sbnation', 'sbn-card']});
   });
 
   // get list of all stories available on The Ringer front-page
@@ -39,6 +41,12 @@ module.exports = function(router) {
   router.get('/sbnation', (req, res, next) => {
     console.log("SBNATION STORIES - path: '/sports/sbnation'");
     fetchSBNationStories(req, res);
+  });
+
+  // get list of all stories available on SBNation front-page
+  router.get('/sbn-card', (req, res, next) => {
+    console.log("RULE of TREE STORIES - path: '/sports/sbn-card'");
+    fetchSBNCardinalStories(req, res);
   });
 };
 
