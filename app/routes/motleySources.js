@@ -6,7 +6,7 @@
 // '/motley/top-medium'   -- Returns all the stories available from Top-Medium front page
 //
 // =================================================================
-// --- let fetchHNewsStories = require("../parsers/hnewsParser");
+let fetchHNewsStories = require("../parsers/hnewsParser");
 let fetchReutersStories = require("../parsers/reutersParser");
 let fetchTopMediumStories = require("../parsers/topMediumParser");
 
@@ -26,8 +26,7 @@ module.exports = function(router) {
   // get list of all stories available on HackerNews front-page
   router.get('/hnews', (req, res, next) => {
     console.log("HNEWS ARTICLES - path: '/motley/hnews'");
-    // --- fetchHNewsStories(req, res);
-    res.status(200).send('Endpoint (HNEWS) not yet implemented.');
+    fetchHNewsStories(req, res);
   });
 
   // get list of all stories available on EchoJS front-page
