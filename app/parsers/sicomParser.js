@@ -12,7 +12,8 @@ let sicomPropertiesExtractor = {
     return "https://www.si.com" + linkItem.attr("href");
   },
   extractId: function(itemContainer, linkItem) {
-    return linkItem.attr("href").split('/').slice(2, 21).join('-').split('-').join('').split('').slice(0, 35).join('');
+    const id = linkItem.attr("href").split('/').slice(2, 21).join('-').split('-').join('').split('').slice(0, 35).join('');
+    return "sicom-" + id;
   },
   extractRank: function(itemContainer, linkItem, rank) {
     return rank;

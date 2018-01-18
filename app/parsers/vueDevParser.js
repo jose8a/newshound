@@ -12,11 +12,11 @@ let vuedevsPropertiesExtractor = {
     return "https://vuejsdevelopers.com" + linkItem.attr("href");
   },
   extractId: function(itemContainer, linkItem) {
-    // --- return itemContainer.data("chorus-optimize-id");
-    return "1010";
+    // VueDevs has no ID for articles, so we'll construct one from the url
+    const siteId = linkItem.attr("href").split('/').join('').trim();
+    return "vuedevs-" + siteId;
   },
   extractRank: function(itemContainer, linkItem, rank) {
-    console.log("boom!");
     return rank;
   }
 }

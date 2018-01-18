@@ -12,7 +12,7 @@ let devtoPropertiesExtractor = {
     return "https://dev.to" + linkItem.attr("href");
   },
   extractId: function(itemContainer, linkItem) {
-    return linkItem.attr("id").split('-')[2];
+    return "devto-" + linkItem.attr("id").split('-')[2];
   },
   extractRank: function(itemContainer, linkItem, rank) {
     return rank;

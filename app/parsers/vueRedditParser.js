@@ -17,7 +17,7 @@ let redditPropertiesExtractor = {
     return url;
   },
   extractId: function(itemContainer, linkItem) {
-    return itemContainer.attr("id");
+    return "vueredd-" + itemContainer.attr("id");
   },
   extractRank: function(itemContainer, linkItem, rank) {
     return rank;

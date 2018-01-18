@@ -12,7 +12,7 @@ let feFrontPropertiesExtractor = {
     return linkItem.attr("href");
   },
   extractId: function(itemContainer, linkItem) {
-    return itemContainer.find(".story-vote > span.arrow").data("red-id");
+    return "fefront-" + itemContainer.find(".story-vote > span.arrow").data("red-id");
   },
   extractRank: function(itemContainer, linkItem, rank) {
     return rank;

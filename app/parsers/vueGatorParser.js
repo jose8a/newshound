@@ -12,8 +12,9 @@ let gatorPropertiesExtractor = {
     return linkItem.attr("href");
   },
   extractId: function(itemContainer, linkItem) {
-    // --- TODO: FIXME: return itemContainer.data("chorus-optimize-id");
-    return "1010";
+    // Vue Gator has no article IDs, so we construct one from the url
+    const siteId = linkItem.attr("href").split('/').slice(1).join('-').trim();
+    return "gator-" + siteId;
   },
   extractRank: function(itemContainer, linkItem, rank) {
     return rank;

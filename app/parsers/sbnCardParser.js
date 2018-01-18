@@ -12,7 +12,7 @@ let sbnationPropertiesExtractor = {
     return linkItem.attr("href");
   },
   extractId: function(itemContainer, linkItem) {
-    return itemContainer.data("chorus-optimize-id");
+    return "scard-" + itemContainer.data("chorus-optimize-id");
   },
   extractRank: function(itemContainer, linkItem, rank) {
     return rank;

@@ -12,7 +12,7 @@ let topMediumPropertiesExtractor = {
     return linkItem.attr("href").split('?')[0];
   },
   extractId: function(itemContainer, linkItem) {
-    return itemContainer.data("post-id");
+    return "topmed-" + itemContainer.data("post-id");
   },
   extractRank: function(itemContainer, linkItem, rank) {
     return rank;

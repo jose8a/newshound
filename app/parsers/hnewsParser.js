@@ -21,7 +21,7 @@ let hnewsPropertiesExtractor = {
     return baseUrl + linkItem.attr("href");
   },
   extractId: function(itemContainer, linkItem) {
-    return itemContainer.attr("id");
+    return "hnews-" + itemContainer.attr("id");
   },
   extractRank: function(itemContainer, linkItem, rank) {
     return rank;

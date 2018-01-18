@@ -12,7 +12,7 @@ let echoPropertiesExtractor = {
     return linkItem.attr("href");
   },
   extractId: function(itemContainer, linkItem) {
-    return itemContainer.data("news-id");
+    return "echo-" + itemContainer.data("news-id");
   },
   extractRank: function(itemContainer, linkItem, rank) {
     return rank;

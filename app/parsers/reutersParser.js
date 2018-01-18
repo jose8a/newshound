@@ -12,7 +12,7 @@ let reutersPropertiesExtractor = {
     return "https://www.reuters.com" + linkItem.attr("href");
   },
   extractId: function(itemContainer, linkItem) {
-    return linkItem.attr("href").split('-').pop();
+    return "reuters-" + linkItem.attr("href").split('-').pop();
   },
   extractRank: function(itemContainer, linkItem, rank) {
     return rank;

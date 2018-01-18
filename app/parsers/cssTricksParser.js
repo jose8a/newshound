@@ -12,7 +12,7 @@ let cssTricksPropertiesExtractor = {
     return linkItem.attr("href");
   },
   extractId: function(itemContainer, linkItem) {
-    return itemContainer.attr("id").split('-')[1];
+    return "csstrix-" + itemContainer.attr("id").split('-')[1];
   },
   extractRank: function(itemContainer, linkItem, rank) {
     return rank;
