@@ -1,5 +1,5 @@
 let perfrocks = "http://perf.rocks/articles/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -35,15 +35,19 @@ let perfRocksSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchPerfRocksStories = function(req, res) {
-  request(perfrocks, function (error, response, html) {
+let fetchPerfRocksStories = async function() {
+  let parsedItems = [];
+
+  await rp(perfrocks, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       perfRocksSiteParser.init(html, perfRocksItemParser);
       perfRocksSiteParser.parseCollection();
 
-      res.status(200).json(perfRocksSiteParser.getParsedItems());
+      parsedItems = perfRocksSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
 module.exports = fetchPerfRocksStories;

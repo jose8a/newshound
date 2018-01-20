@@ -24,45 +24,63 @@ module.exports = function(router) {
   });
 
   // get list of all available tech sources
-  router.get('/list', (req, res, next) => {
+  router.get('/_meta', (req, res, next) => {
     console.log("ALL AVAILABLE SOURCES - path: '/tech/list'");
     res.status(200).json({sources: ['fefront', 'echo', 'css-tricks', 'dev-to', 'scotch', 'perf-rocks']});
   });
 
   // get list of all stories available on FEFront front-page
-  router.get('/fefront', (req, res, next) => {
+  router.get('/fefront', async (req, res, next) => {
     console.log("FEFRONT ARTICLES - path: '/tech/fefront'");
     fetchFEFStories(req, res);
+
+    const fetchedItems = await fetchFEFStories();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all stories available on EchoJS front-page
-  router.get('/echo', (req, res, next) => {
+  router.get('/echo', async (req, res, next) => {
     console.log("ECHO ARTICLES - path: '/tech/echo'");
     fetchEchoStories(req, res);
+
+    const fetchedItems = await fetchEchoStories();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all stories available on CSS Tricks front-page
-  router.get('/css-tricks', (req, res, next) => {
+  router.get('/css-tricks', async (req, res, next) => {
     console.log("CSS TRICKS ARTICLES - path: '/tech/css-tricks'");
     fetchCSSTricksStories(req, res);
+
+    const fetchedItems = await fetchCSSTricksStories();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all stories available on DevTo front-page
-  router.get('/dev-to', (req, res, next) => {
+  router.get('/dev-to', async (req, res, next) => {
     console.log("DEVTO ARTICLES - path: '/tech/dev-to'");
     fetchDevToStories(req, res);
+
+    const fetchedItems = await fetchDevToStories();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all stories available on ScotchIO front-page
-  router.get('/scotch', (req, res, next) => {
+  router.get('/scotch', async (req, res, next) => {
     console.log("SCOTCHIO ARTICLES - path: '/tech/scotch'");
     // --- res.status(200).send('TODO: Implementation not yet complete.');
     fetchScotchStories(req, res);
+
+    const fetchedItems = await fetchScotchStories();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all stories available on Perf-Rocks front-page
-  router.get('/perf-rocks', (req, res, next) => {
+  router.get('/perf-rocks', async (req, res, next) => {
     console.log("PERF-ROCKS ARTICLES - path: '/tech/perf-rocks'");
     fetchPerfRocksStories(req, res);
+
+    const fetchedItems = await fetchPerfRocksStories();
+    res.status(200).json(fetchedItems);
   });
 };

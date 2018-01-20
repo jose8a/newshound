@@ -1,5 +1,5 @@
 var scotch = "https://scotch.io/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -35,15 +35,19 @@ let scotchSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchScotchStories = function(req, res) {
-  request(scotch, function (error, response, html) {
+let fetchScotchStories = async function() {
+  let parsedItems = [];
+
+  await rp(scotch, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       scotchSiteParser.init(html, scotchItemParser);
       scotchSiteParser.parseCollection();
 
-      res.status(200).json(scotchSiteParser.getParsedItems());
+      parsedItems = scotchSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
 module.exports = fetchScotchStories;

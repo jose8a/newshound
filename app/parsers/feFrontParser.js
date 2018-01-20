@@ -1,5 +1,5 @@
 let fefront = "https://frontendfront.com/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -34,15 +34,19 @@ let feFrontSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchFEFStories = function(req, res) {
-  request(fefront, function (error, response, html) {
+let fetchFEFStories = async function() {
+  let parsedItems = [];
+
+  await rp(fefront, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       feFrontSiteParser.init(html, feFrontItemParser);
       feFrontSiteParser.parseCollection();
 
-      res.status(200).json(feFrontSiteParser.getParsedItems());
+      parsedItems = feFrontSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
 module.exports = fetchFEFStories;

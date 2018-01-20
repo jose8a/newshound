@@ -1,5 +1,5 @@
 var devToHtml = "https://dev.to/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -34,15 +34,19 @@ let devtoSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchDevToStories = function(req, res) {
-  request(devToHtml, function (error, response, html) {
+let fetchDevToStories = async function() {
+  let parsedItems = [];
+
+  await rp(devToHtml, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       devtoSiteParser.init(html, devtoItemParser);
       devtoSiteParser.parseCollection();
 
-      res.status(200).json(devtoSiteParser.getParsedItems());
+      parsedItems = devtoSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
 module.exports = fetchDevToStories;

@@ -1,5 +1,5 @@
 let cssTricks = "https://css-tricks.com/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -19,7 +19,6 @@ let cssTricksPropertiesExtractor = {
   },
 }
 
-
 // 2. create a cssTricksItemParser from the generic newsItemParser in
 //    order to assign css-tricks-specific properties to it
 let cssTricksItemParser = Object.create(newsItemParser);
@@ -35,15 +34,19 @@ let cssTricksSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchCSSTricksStories = function(req, res) {
-  request(cssTricks, function (error, response, html) {
+let fetchCSSTricksStories = async function() {
+  let parsedItems = [];
+
+  await rp(cssTricks, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       cssTricksSiteParser.init(html, cssTricksItemParser);
       cssTricksSiteParser.parseCollection();
 
-      res.status(200).json(cssTricksSiteParser.getParsedItems());
+      parsedItems = cssTricksSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
 module.exports = fetchCSSTricksStories;
