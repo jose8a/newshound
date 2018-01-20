@@ -1,5 +1,5 @@
 let reddit = "https://www.reddit.com/r/vuejs/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -39,15 +39,19 @@ let redditSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchRingerStories = function(req, res) {
-  request(reddit, function (error, response, html) {
+let fetchVueRedditStories = async function() {
+  let parsedItems = [];
+
+  await rp(reddit, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       redditSiteParser.init(html, redditItemParser);
       redditSiteParser.parseCollection();
 
-      res.status(200).json(redditSiteParser.getParsedItems());
+      parsedItems = redditSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
-module.exports = fetchRingerStories;
+module.exports = fetchVueRedditStories;

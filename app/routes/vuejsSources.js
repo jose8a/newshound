@@ -18,30 +18,33 @@ module.exports = function(router) {
   });
 
   // get list of all available news sources
-  router.get('/list', (req, res, next) => {
+  router.get('/_meta', (req, res, next) => {
     console.log("ALL AVAILABLE VUE SOURCES - path: '/vue/list'");
     res.status(200).json({sources: ['vuedevs', 'gator', 'reddit']});
   });
 
   // get list of all stories available on Vuejsdevelopers front-page
-  router.get('/vuedevs', (req, res, next) => {
+  router.get('/vuedevs', async (req, res, next) => {
     console.log("VUEJSDEVELOPERS ARTICLES - path: '/vue/vuedevs'");
-    fetchVueDevStories(req, res);
-    // --- res.status(200).send('Endpoint (VUEDEVS) not yet implemented.');
+
+    const fetchedItems = await fetchVueDevStories();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all stories available on Alligator front-page
-  router.get('/gator', (req, res, next) => {
+  router.get('/gator', async (req, res, next) => {
     console.log("ALLIGATOR VUE ARTICLES - path: '/vue/gator'");
-    fetchVueGatorStories(req, res);
-    // --- res.status(200).send('Endpoint (GATOR) not yet implemented.');
+
+    const fetchedItems = await fetchVueGatorStories();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all stories available on Reddit/r/vuejs front-page
-  router.get('/reddit', (req, res, next) => {
+  router.get('/reddit', async (req, res, next) => {
     console.log("VUE REDDIT ARTICLES - path: '/vue/reddit'");
-    fetchVueRedditStories(req, res);
-    // --- res.status(200).send('Endpoint (REDDIT) not yet implemented.');
+
+    const fetchedItems = await fetchVueRedditStories();
+    res.status(200).json(fetchedItems);
   });
 };
 

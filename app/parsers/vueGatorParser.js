@@ -1,5 +1,5 @@
 let gator = "https://alligator.io/vuejs/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -37,15 +37,19 @@ let gatorSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchRingerStories = function(req, res) {
-  request(gator, function (error, response, html) {
+let fetchVueGatorStories = async function() {
+  let parsedItems = [];
+
+  await rp(gator, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       gatorSiteParser.init(html, gatorItemParser);
       gatorSiteParser.parseCollection();
 
-      res.status(200).json(gatorSiteParser.getParsedItems());
+      parsedItems = gatorSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
-module.exports = fetchRingerStories;
+module.exports = fetchVueGatorStories;

@@ -1,5 +1,5 @@
 let vuedevs = "https://vuejsdevelopers.com/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -36,15 +36,19 @@ let vuedevsSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchVueDevsStories = function(req, res) {
-  request(vuedevs, function (error, response, html) {
+let fetchVueDevsStories = async function() {
+  let parsedItems = [];
+
+  await rp(vuedevs, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       vuedevsSiteParser.init(html, vuedevsItemParser);
       vuedevsSiteParser.parseCollection();
 
-      res.status(200).json(vuedevsSiteParser.getParsedItems());
+      parsedItems = vuedevsSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
 module.exports = fetchVueDevsStories;
