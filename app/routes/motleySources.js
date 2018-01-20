@@ -18,26 +18,32 @@ module.exports = function(router) {
   });
 
   // get list of all available motley sources
-  router.get('/list', (req, res, next) => {
+  router.get('/_meta', (req, res, next) => {
     console.log("ALL AVAILABLE MOTLEY SOURCES - path: '/motley/list'");
     res.status(200).json({sources: ['hnews', 'reuters', 'top-medium']});
   });
 
   // get list of all stories available on HackerNews front-page
-  router.get('/hnews', (req, res, next) => {
+  router.get('/hnews', async (req, res, next) => {
     console.log("HNEWS ARTICLES - path: '/motley/hnews'");
-    fetchHNewsStories(req, res);
+
+    const fetchedItems = await fetchHNewsStories();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all stories available on EchoJS front-page
-  router.get('/reuters', (req, res, next) => {
+  router.get('/reuters', async (req, res, next) => {
     console.log("REUTERS ARTICLES - path: '/motley/reuters'");
-    fetchReutersStories(req, res);
+
+    const fetchedItems = await fetchReutersStories();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all stories available on CSS Tricks front-page
-  router.get('/top-medium', (req, res, next) => {
+  router.get('/top-medium', async (req, res, next) => {
     console.log("MEDIUM-TOP ARTICLES - path: '/motley/top-medium'");
-    fetchTopMediumStories(req, res);
+
+    const fetchedItems = await fetchTopMediumStories();
+    res.status(200).json(fetchedItems);
   });
 };

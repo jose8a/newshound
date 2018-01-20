@@ -1,5 +1,5 @@
 let hnews = "https://news.ycombinator.com/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -43,15 +43,19 @@ let hnewsSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchHNewsStories = function(req, res) {
-  request(hnews, function (error, response, html) {
+let fetchHNewsStories = async function() {
+  let parsedItems = [];
+
+  await rp(hnews, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       hnewsSiteParser.init(html, hnewsItemParser);
       hnewsSiteParser.parseCollection();
 
-      res.status(200).json(hnewsSiteParser.getParsedItems());
+      parsedItems = hnewsSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
 module.exports = fetchHNewsStories;

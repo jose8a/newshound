@@ -1,5 +1,5 @@
 let reuters = "https://www.reuters.com/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -34,15 +34,19 @@ let reutersSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchReutersStories = function(req, res) {
-  request(reuters, function (error, response, html) {
+let fetchReutersStories = async function() {
+  let parsedItems = [];
+
+  await rp(reuters, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       reutersSiteParser.init(html, reutersItemParser);
       reutersSiteParser.parseCollection();
 
-      res.status(200).json(reutersSiteParser.getParsedItems());
+      parsedItems = reutersSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
 module.exports = fetchReutersStories;
