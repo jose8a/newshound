@@ -7,6 +7,7 @@
 // '/sports/sbn-card'     -- Returns all the stories available from Rule of Tree front page
 //
 // =================================================================
+let fetchAllSports = require("../parsers/fetchSportsNews");
 let fetchRingerStories = require("../parsers/ringerParser");
 let fetchSIStories = require("../parsers/sicomParser");
 let fetchSBNationStories = require("../parsers/sbnationParser");
@@ -14,39 +15,49 @@ let fetchSBNCardinalStories = require("../parsers/sbnCardParser");
 
 module.exports = function(router) {
   // get a collection of all my available stories from all sources
-  router.get('/', (req, res, next) => {
-    console.log("ALL AVAILABLE SPORTS STORIES - path: '/sports/'");
-    res.status(200).json({stories: {sicom: "tbd", sbnation: "tbd", ringer: "tbd", sbncard: "tbd"}});
+  router.get('/', async (req, res, next) => {
+    console.log("ALL SPORTS STORIES - path: '/sports/'");
+
+    const fetchedItems = await fetchAllSports();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all available news sources
-  router.get('/list', (req, res, next) => {
+  router.get('/_meta', (req, res, next) => {
     console.log("ALL AVAILABLE SOURCES - path: '/sports/list'");
     res.status(200).json({sources: ['the-ringer', 'si-com', 'sbnation', 'sbn-card']});
   });
 
   // get list of all stories available on The Ringer front-page
-  router.get('/the-ringer', (req, res, next) => {
+  router.get('/the-ringer', async (req, res, next) => {
     console.log("THE RINGER STORIES - path: '/sports/the-ringer'");
-    fetchRingerStories(req, res);
+
+    const fetchedItems = await fetchRingerStories();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all stories available on SI.com front-page
-  router.get('/si-com', (req, res, next) => {
+  router.get('/si-com', async (req, res, next) => {
     console.log("SI-COM STORIES - path: '/sports/si-com'");
-    fetchSIStories(req, res);
+
+    const fetchedItems = await fetchSIStories();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all stories available on SBNation front-page
-  router.get('/sbnation', (req, res, next) => {
+  router.get('/sbnation', async (req, res, next) => {
     console.log("SBNATION STORIES - path: '/sports/sbnation'");
-    fetchSBNationStories(req, res);
+
+    const fetchedItems = await fetchSBNationStories();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all stories available on SBNation front-page
-  router.get('/sbn-card', (req, res, next) => {
+  router.get('/sbn-card', async (req, res, next) => {
     console.log("RULE of TREE STORIES - path: '/sports/sbn-card'");
-    fetchSBNCardinalStories(req, res);
+
+    const fetchedItems = await fetchSBNCardinalStories();
+    res.status(200).json(fetchedItems);
   });
 };
 

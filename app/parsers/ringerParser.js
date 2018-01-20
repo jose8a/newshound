@@ -1,5 +1,5 @@
 let ringer = "https://www.theringer.com/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -34,15 +34,19 @@ let ringerSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchRingerStories = function(req, res) {
-  request(ringer, function (error, response, html) {
+let fetchRingerStories = async function() {
+  let parsedItems = [];
+
+  await rp(ringer, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       ringerSiteParser.init(html, ringerItemParser);
       ringerSiteParser.parseCollection();
 
-      res.status(200).json(ringerSiteParser.getParsedItems());
+      parsedItems = ringerSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
 module.exports = fetchRingerStories;

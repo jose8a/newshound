@@ -1,5 +1,5 @@
 let sbnCard = "https://www.ruleoftree.com/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -34,15 +34,19 @@ let sbnationSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchSBNCardinalStories = function(req, res) {
-  request(sbnCard, function (error, response, html) {
+let fetchSBNCardinalStories = async function() {
+  let parsedItems = [];
+
+  await rp(sbnCard, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       sbnationSiteParser.init(html, sbnationItemParser);
       sbnationSiteParser.parseCollection();
 
-      res.status(200).json(sbnationSiteParser.getParsedItems());
+      parsedItems = sbnationSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
 module.exports = fetchSBNCardinalStories;

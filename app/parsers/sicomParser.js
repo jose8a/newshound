@@ -1,5 +1,5 @@
 let sicom = "https://www.si.com/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -35,15 +35,19 @@ let sicomSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchSIStories = function(req, res) {
-  request(sicom, function (error, response, html) {
+let fetchSIStories = async function() {
+  let parsedItems = [];
+
+  await rp(sicom, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       sicomSiteParser.init(html, sicomItemParser);
       sicomSiteParser.parseCollection();
 
-      res.status(200).json(sicomSiteParser.getParsedItems());
+      parsedItems = sicomSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
 module.exports = fetchSIStories;

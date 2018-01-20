@@ -1,5 +1,5 @@
 let sbnation = "https://www.sbnation.com/";
-let request = require('request');
+let rp = require('request-promise');
 let newsItemParser = require('./newsItemParser');
 let collectionParser = require('./siteParser')
 
@@ -34,15 +34,19 @@ let sbnationSiteParser = Object.create(collectionParser);
 
 // 5. use the parser in conjunction with cheerio and request/request to
 //    retrieve stories from the site
-let fetchSBNationStories = function(req, res) {
-  request(sbnation, function (error, response, html) {
+let fetchSBNationStories = async function() {
+  let parsedItems = [];
+
+  await rp(sbnation, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       sbnationSiteParser.init(html, sbnationItemParser);
       sbnationSiteParser.parseCollection();
 
-      res.status(200).json(sbnationSiteParser.getParsedItems());
+      parsedItems = sbnationSiteParser.getParsedItems();
     }
   });
+
+  return parsedItems;
 };
 
 module.exports = fetchSBNationStories;
