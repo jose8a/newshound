@@ -6,15 +6,18 @@
 // '/motley/top-medium'   -- Returns all the stories available from Top-Medium front page
 //
 // =================================================================
+let fetchAllMotleyNews = require("../parsers/fetchMotleyNews");
 let fetchHNewsStories = require("../parsers/hnewsParser");
 let fetchReutersStories = require("../parsers/reutersParser");
 let fetchTopMediumStories = require("../parsers/topMediumParser");
 
 module.exports = function(router) {
   // get a collection of all my available stories from all sources
-  router.get('/', (req, res, next) => {
+  router.get('/', async (req, res, next) => {
     console.log("ALL AVAILABLE MOTLEY NEWS ARTICLES - path: '/motley/'");
-    res.status(200).json({stories: {hnews: "tbd", reuters: "tbd", topMedium: "tbd"}});
+
+    const fetchedItems = await fetchAllMotleyNews();
+    res.status(200).json(fetchedItems);
   });
 
   // get list of all available motley sources
