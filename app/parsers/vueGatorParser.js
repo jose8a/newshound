@@ -14,8 +14,8 @@ let gatorPropertiesExtractor = {
   extractId: function(itemContainer, linkItem) {
     // Vue Gator has no article IDs, so we construct one from the url
     let siteId = linkItem.attr("href").split('/').slice(1).join('-').trim();
-    siteId = siteId.replace(/\./, '-');
-    siteId = siteId.replace(/#/, '-');
+    siteId = siteId.split('.').join('-');
+    siteId = siteId.split('#').join('-');
     return "gator-" + siteId;
   },
   extractRank: function(itemContainer, linkItem, rank) {
