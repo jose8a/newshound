@@ -13,6 +13,8 @@ let perfRocksPropertiesExtractor = {
   },
   extractId: function(itemContainer, linkItem) {
     let uriPathEnd = linkItem.attr("href").split('/').reverse().slice(1,2).join();
+    uriPathEnd = uriPathEnd.replace(/\./, '-');
+    uriPathEnd = uriPathEnd.replace(/#/, '-');
     return "perf-" + uriPathEnd.split('-').join('');
   },
   extractRank: function(itemContainer, linkItem, rank) {

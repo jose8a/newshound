@@ -6,14 +6,16 @@ let collectionParser = require('./siteParser')
 // 1. create gator-specific properties parser
 let gatorPropertiesExtractor = {
   extractTitle: function(itemContainer, linkItem) {
-    return linkItem.text().trim();
+    return linkItem.find('h3').text().trim();
   },
   extractUrl: function(itemContainer, linkItem) {
     return linkItem.attr("href");
   },
   extractId: function(itemContainer, linkItem) {
     // Vue Gator has no article IDs, so we construct one from the url
-    const siteId = linkItem.attr("href").split('/').slice(1).join('-').trim();
+    let siteId = linkItem.attr("href").split('/').slice(1).join('-').trim();
+    siteId = siteId.replace(/\./, '-');
+    siteId = siteId.replace(/#/, '-');
     return "gator-" + siteId;
   },
   extractRank: function(itemContainer, linkItem, rank) {
