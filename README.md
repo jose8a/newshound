@@ -1,48 +1,107 @@
 # NewsHound
- * Service Description: a personal service for collecting and
-     displaying the top top-news-items from:
-     -- HNews
-     -- echoJS
-     -- frontend-front
-     -- designernews
-     -- etc ...
+A news service that retrieves links to the latest news items and articles from a variety of news and tech sources.
+
+### Motivation
+To waste less time finding, filtering, and taking in the news of the day.  This is a simple, no-nonsense service that can lay the foundation for saving bookmarks to news items, filtering news by tagging or topic, data visualizations of personalized news streams, and much more.
 
 
-### News Sources:
-  * [X] Frontend-Front
-  * [X] EchoJS
-  * [X] css-tricks
-  * [X] dev.to
-  * [X] perf.rocks
-  * [X] scotch.io
-  * [X] mediumTop
-  * [X] reuters
-  * [X] theRinger
-  * [X] si.com
-  * [X] sbnation
+### DEMO & Live code
+  * [the root endpoint](https://newshound.glitch.me/)
+  * [the `/tech/reuters` endpoint](https://newshound.glitch.me/motley/reuters)
+  * [Editable Glitch.com project](https://glitch.com/edit/#!/newshound?path=README.md:1:0)
 
-### Future Sources
-##### General Web Tech
-  * [ ] HNews         // can't implement it until I refactor project to use request-async
-  * [ ] api-dev.to    // same comment as for hnews
-  * [ ] codrops-collective  // TODO: later
 
-##### VueJs Info sources
-  * [ ] alligator-io/vuejs (https://alligator.io/vuejs/)              // TODO: later
-  * [ ] vuejsdevelopers (https://vuejsdevelopers.com/topics/#vue.js)  // TODO: later
-  * [ ] reddit/r/vuejs      // TODO: later
+## API endpoints
+#### Motley endpoints
+  * `/motley`
+  * `/motley/hnews`
+  * `/motley/reuters`
+  * `/motley/top-medium`
+  * `/motley/_meta`
 
-##### Sports
-  * [ ] espnfc/scores       // TODO: later
-  * [ ] TRI schedule        // TODO: later
-  * [ ] USMNT schedule      // TODO: later
 
-##### BizTech sources
-  * [Signal v. Noise - Latest](https://m.signalvnoise.com/latest)
-  * [Mark Suster - Both Sides of the Table](https://bothsidesofthetable.com/@msuster)
-  * [ThinkGrowth.org - Latest](https://thinkgrowth.org/latest)
-  * [AVC](http://avc.com/)
-  * [Benedict Evans](https://www.ben-evans.com/)
-  * [andrewchen - Latest](http://andrewchen.co/recent/)
-  * [@ASmartBear - Latest](https://blog.asmartbear.com/)
+#### Tech endpoints
+  * `/tech`
+  * `/tech/fefront`
+  * `/tech/echo`
+  * `/tech/css-tricks`
+  * `/tech/dev-to`
+  * `/tech/scotch`
+  * `/tech/perf-rocks`
+  * `/tech/_meta`
 
+
+#### Sports endpoints
+  * `/sports`
+  * `/sports/the-ringer`
+  * `/sports/si-com`
+  * `/sports/sbnation`
+  * `/sports/sbn-card`
+  * `/sports/_meta`
+
+
+#### Vue endpoints
+  * `/vue`
+  * `/vue/vuedevs`
+  * `/vue/gator`
+  * `/vue/reddit`
+  * `/vue/_meta`
+
+
+#### Response envelope
+The response of each endpoint - when succesful - will be an array of article-objects with the following properties for each article:
+
+  * source - the news/tech source for this article
+  * title - the title of the article
+  * url - the absolute url at the source provided by the news/tech source
+  * sourceId - an id for the article composed of two parts
+    1 - an abbreviated string for the source of the article (e.g. hn for the Hacker News source)
+    2 - either an id for the article provided by the source, or one derived from the url of the article
+  * fetchDate - simple the date for when the article was fetched from the source
+  * rank - simply the order of the article at the time it was fetched from the source
+
+
+## Getting Started
+### Prerequisites
+  * node (version 8+)
+  * npm
+
+
+### Installation
+
+    git clone ...
+    cd newshound
+    npm install
+
+
+### Launch Server
+Launch the server by running one of the following two commands:
+
+    nodemon server.js
+    npm run start
+
+
+### Run Tests
+  * tbd
+
+
+## Built With ...
+* node
+* express
+* cheerio
+
+
+## Contributing
+* tbd
+
+
+## Authors
+* [jose8a](https://github.com/jose8a)
+
+
+## License
+* tbd ..
+
+
+## Acknowledgements
+* tbd ..
