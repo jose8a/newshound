@@ -23,7 +23,14 @@ var cors = require('cors');
 var csrf = require('csurf');                // TODO: logic
 var helmet = require('helmet');
 
-var whitelist = ['http://localhost:7080', 'http://localhost:3500'];
+const CORS_ORIGIN = process.env.CORS_ORIGIN;
+const CORS_METHODS = process.env.METHODS;
+const CORS_PREFLIGHT = process.env.PREFLIGHT;
+const CORS_SUCCESS_STATUS = process.env.OPTIONS_SUCCESS_STATUS;
+
+const whitelist = CORS_ORIGIN.split(',');
+console.log(whitelist);
+
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
