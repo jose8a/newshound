@@ -51,14 +51,14 @@ To waste less time finding, filtering, and taking in the news of the day.  This 
 #### Response envelope
 The response of each endpoint - when succesful - will be an array of article-objects with the following properties for each article:
 
-  * source - the news/tech source for this article
-  * title - the title of the article
-  * url - the absolute url at the source provided by the news/tech source
-  * sourceId - an id for the article composed of two parts
+  * `source` - the news/tech source for this article
+  * `title` - the title of the article
+  * `url` - the absolute url at the source provided by the news/tech source
+  * `sourceId` - an id for the article composed of two parts
     1 - an abbreviated string for the source of the article (e.g. hn for the Hacker News source)
     2 - either an id for the article provided by the source, or one derived from the url of the article
-  * fetchDate - simple the date for when the article was fetched from the source
-  * rank - simply the order of the article at the time it was fetched from the source
+  * `fetchDate` - simple the date for when the article was fetched from the source
+  * `rank` - simply the order of the article at the time it was fetched from the source
 
 
 ## Getting Started
@@ -69,13 +69,13 @@ The response of each endpoint - when succesful - will be an array of article-obj
 
 ### Installation
 
-    git clone ...
+    git clone https://github.com/jose8a/newshound.git
     cd newshound
     npm install
 
 
 ### Launch Server
-Launch the server by running one of the following two commands:
+Launch the server by running either one of the following commands:
 
     nodemon server.js
     npm run start
@@ -86,22 +86,22 @@ Launch the server by running one of the following two commands:
 
 
 ## Built With ...
-* node
-* express
-* cheerio
+  * node
+  * express
+  * cheerio
 
 
 ## Contributing
-* tbd
+  * tbd
 
 
 ## Authors
-* [jose8a](https://github.com/jose8a)
+  * [jose8a](https://github.com/jose8a)
 
 
 ## License
-* tbd ..
+  * tbd ..
 
 
 ## Acknowledgements
-* tbd ..
+  * tbd ..
