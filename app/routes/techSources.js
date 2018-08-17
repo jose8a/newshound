@@ -48,21 +48,32 @@ module.exports = function(router) {
     res.status(200).json(fetchedItems);
   });
 
-  // get list of all stories available on CSS Tricks front-page
-  router.get('/css-tricks', async (req, res, next) => {
-    console.log("CSS TRICKS ARTICLES - path: '/tech/css-tricks'");
+  // ==================================================
+  // 20180817 - disable CSS-Tricks parsing due to problems retrieving
+  // and parsing in recent days - it breaks rest of the app
+  //
+  // --- // get list of all stories available on CSS Tricks front-page
+  // --- router.get('/css-tricks', async (req, res, next) => {
+  // ---   console.log("CSS TRICKS ARTICLES - path: '/tech/css-tricks'");
 
-    const fetchedItems = await fetchCSSTricksStories();
-    res.status(200).json(fetchedItems);
-  });
+  // ---   const fetchedItems = await fetchCSSTricksStories();
+  // ---   res.status(200).json(fetchedItems);
+  // --- });
+  // ==================================================
 
-  // get list of all stories available on DevTo front-page
-  router.get('/dev-to', async (req, res, next) => {
-    console.log("DEVTO ARTICLES - path: '/tech/dev-to'");
+  // ==================================================
+  // --- 20180817 - disable DevTo parsing due to low-value news
+  // articles. Their articles rarely have much depth or new information
+  // that other tech-article sites and blogs don't already churn out
+  //
+  // --- // get list of all stories available on DevTo front-page
+  // --- router.get('/dev-to', async (req, res, next) => {
+  // ---   console.log("DEVTO ARTICLES - path: '/tech/dev-to'");
 
-    const fetchedItems = await fetchDevToStories();
-    res.status(200).json(fetchedItems);
-  });
+  // ---   const fetchedItems = await fetchDevToStories();
+  // ---   res.status(200).json(fetchedItems);
+  // --- });
+  // ==================================================
 
   // get list of all stories available on ScotchIO front-page
   router.get('/scotch', async (req, res, next) => {

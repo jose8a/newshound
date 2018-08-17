@@ -12,10 +12,10 @@ module.exports = async function() {
   results = await Promise.all([
     fetchFEFStories(),
     fetchEchoStories(),
-    fetchCSSTricksStories(),
-    fetchDevToStories(),
     fetchScotchStories(),
     fetchPerfRocksStories(),
+    // fetchCSSTricksStories(),
+    // fetchDevToStories(),
   ]);
 
   results.forEach((list) => {
