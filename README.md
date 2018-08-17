@@ -24,8 +24,6 @@ To waste less time finding, filtering, and taking in the news of the day.  This 
   * `/tech`
   * `/tech/fefront`
   * `/tech/echo`
-  * `/tech/css-tricks`
-  * `/tech/dev-to`
   * `/tech/scotch`
   * `/tech/perf-rocks`
   * `/tech/_meta`

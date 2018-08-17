@@ -61,20 +61,6 @@ module.exports = function(router) {
   // --- });
   // ==================================================
 
-  // ==================================================
-  // --- 20180817 - disable DevTo parsing due to low-value news
-  // articles. Their articles rarely have much depth or new information
-  // that other tech-article sites and blogs don't already churn out
-  //
-  // --- // get list of all stories available on DevTo front-page
-  // --- router.get('/dev-to', async (req, res, next) => {
-  // ---   console.log("DEVTO ARTICLES - path: '/tech/dev-to'");
-
-  // ---   const fetchedItems = await fetchDevToStories();
-  // ---   res.status(200).json(fetchedItems);
-  // --- });
-  // ==================================================
-
   // get list of all stories available on ScotchIO front-page
   router.get('/scotch', async (req, res, next) => {
     console.log("SCOTCHIO ARTICLES - path: '/tech/scotch'");

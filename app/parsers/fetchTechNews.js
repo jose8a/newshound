@@ -15,7 +15,6 @@ module.exports = async function() {
     fetchScotchStories(),
     fetchPerfRocksStories(),
     // fetchCSSTricksStories(),
-    // fetchDevToStories(),
   ]);
 
   results.forEach((list) => {
