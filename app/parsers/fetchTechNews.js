@@ -1,19 +1,22 @@
-let fetchFEFStories = require("../parsers/feFrontParser");
-let fetchEchoStories = require("../parsers/echoParser");
-let fetchCSSTricksStories = require("../parsers/cssTricksParser");
-let fetchScotchStories = require("../parsers/scotchParser");
-let fetchPerfRocksStories = require("../parsers/perfRocksParser");
+let fetchSiteItems = require("../parsers/parserActions");
+
+let fefConfigs = require("./configs/feFrontParserConfig");
+let echoConfigs = require("./configs/echoParserConfig");
+let scotchConfigs = require("./configs/scotchParserConfig");
+let perfRocksConfigs = require("./configs/perfRocksParserConfig");
+// let cssTricksConfigs = require("./configs/cssTricksParserConfig");
+
 
 module.exports = async function() {
   let results = [];
   let response = [];
 
   results = await Promise.all([
-    fetchFEFStories(),
-    fetchEchoStories(),
-    fetchScotchStories(),
-    fetchPerfRocksStories(),
-    // fetchCSSTricksStories(),
+    fetchSiteItems(fefConfigs),
+    fetchSiteItems(echoConfigs),
+    fetchSiteItems(scotchConfigs),
+    fetchSiteItems(perfRocksConfigs),
+    // fetchSiteItems(cssTricksConfigs),
   ]);
 
   results.forEach((list) => {

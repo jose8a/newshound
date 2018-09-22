@@ -9,12 +9,15 @@
 // '/tech/perf-rocks'   -- Returns all the stories available from Perf-Rocks front page
 //
 // =================================================================
+let fetchSiteItems = require("../parsers/parserActions");
 let fetchAllTechNews = require("../parsers/fetchTechNews");
-let fetchFEFStories = require("../parsers/feFrontParser");
-let fetchEchoStories = require("../parsers/echoParser");
-let fetchCSSTricksStories = require("../parsers/cssTricksParser");
-let fetchScotchStories = require("../parsers/scotchParser");
-let fetchPerfRocksStories = require("../parsers/perfRocksParser");
+
+let fefConfigs = require("../parsers/configs/feFrontParserConfig");
+let echoConfigs = require("../parsers/configs/echoParserConfig");
+let scotchConfigs = require("../parsers/configs/scotchParserConfig");
+let perfRocksConfigs = require("../parsers/configs/perfRocksParserConfig");
+// let cssTricksConfigs = require("../parsers/configs/cssTricksParserConfig");
+
 
 module.exports = function(router) {
   // get a collection of all my available stories from all sources
@@ -35,7 +38,7 @@ module.exports = function(router) {
   router.get('/fefront', async (req, res, next) => {
     console.log("FEFRONT ARTICLES - path: '/tech/fefront'");
 
-    const fetchedItems = await fetchFEFStories();
+    const fetchedItems = await fetchSiteItems(fefConfigs);
     res.status(200).json(fetchedItems);
   });
 
@@ -43,7 +46,7 @@ module.exports = function(router) {
   router.get('/echo', async (req, res, next) => {
     console.log("ECHO ARTICLES - path: '/tech/echo'");
 
-    const fetchedItems = await fetchEchoStories();
+    const fetchedItems = await fetchSiteItems(echoConfigs);
     res.status(200).json(fetchedItems);
   });
 
@@ -55,7 +58,7 @@ module.exports = function(router) {
   // --- router.get('/css-tricks', async (req, res, next) => {
   // ---   console.log("CSS TRICKS ARTICLES - path: '/tech/css-tricks'");
 
-  // ---   const fetchedItems = await fetchCSSTricksStories();
+  // ---   const fetchedItems = await fetchSiteItems(cssTricksConfigs);
   // ---   res.status(200).json(fetchedItems);
   // --- });
   // ==================================================
@@ -65,7 +68,7 @@ module.exports = function(router) {
     console.log("SCOTCHIO ARTICLES - path: '/tech/scotch'");
     // --- res.status(200).send('TODO: Implementation not yet complete.');
 
-    const fetchedItems = await fetchScotchStories();
+    const fetchedItems = await fetchSiteItems(scotchConfigs);
     res.status(200).json(fetchedItems);
   });
 
@@ -73,7 +76,7 @@ module.exports = function(router) {
   router.get('/perf-rocks', async (req, res, next) => {
     console.log("PERF-ROCKS ARTICLES - path: '/tech/perf-rocks'");
 
-    const fetchedItems = await fetchPerfRocksStories();
+    const fetchedItems = await fetchSiteItems(perfRocksConfigs);
     res.status(200).json(fetchedItems);
   });
 };
