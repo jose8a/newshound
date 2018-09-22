@@ -6,10 +6,13 @@
 // '/motley/top-medium'   -- Returns all the stories available from Top-Medium front page
 //
 // =================================================================
+let fetchSiteItems = require("../parsers/parserActions");
 let fetchAllMotleyNews = require("../parsers/fetchMotleyNews");
-let fetchHNewsStories = require("../parsers/hnewsParser");
-let fetchReutersStories = require("../parsers/reutersParser");
-let fetchTopMediumStories = require("../parsers/topMediumParser");
+
+let hnewsConfigs = require("../parsers/configs/hnewsParserConfig");
+let reutersConfigs = require("../parsers/configs/reutersParserConfig");
+let topMediumConfigs = require("../parsers/configs/topMediumParserConfig");
+
 
 module.exports = function(router) {
   // get a collection of all my available stories from all sources
@@ -30,7 +33,7 @@ module.exports = function(router) {
   router.get('/hnews', async (req, res, next) => {
     console.log("HNEWS ARTICLES - path: '/motley/hnews'");
 
-    const fetchedItems = await fetchHNewsStories();
+    const fetchedItems = await fetchSiteItems(hnewsConfigs);
     res.status(200).json(fetchedItems);
   });
 
@@ -38,7 +41,7 @@ module.exports = function(router) {
   router.get('/reuters', async (req, res, next) => {
     console.log("REUTERS ARTICLES - path: '/motley/reuters'");
 
-    const fetchedItems = await fetchReutersStories();
+    const fetchedItems = await fetchSiteItems(reutersConfigs);
     res.status(200).json(fetchedItems);
   });
 
@@ -46,7 +49,7 @@ module.exports = function(router) {
   router.get('/top-medium', async (req, res, next) => {
     console.log("MEDIUM-TOP ARTICLES - path: '/motley/top-medium'");
 
-    const fetchedItems = await fetchTopMediumStories();
+    const fetchedItems = await fetchSiteItems(topMediumConfigs);
     res.status(200).json(fetchedItems);
   });
 };

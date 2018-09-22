@@ -1,15 +1,17 @@
-let fetchHNewsStories = require("../parsers/hnewsParser");
-let fetchReutersStories = require("../parsers/reutersParser");
-let fetchTopMediumStories = require("../parsers/topMediumParser");
+let fetchSiteItems = require("./parserActions");
+
+let hnewsConfigs = require("./configs/hnewsParserConfig");
+let reutersConfigs = require("./configs/reutersParserConfig");
+let topMediumConfigs = require("./configs/topMediumParserConfig");
 
 module.exports = async function() {
   let results = [];
   let response = [];
 
   results = await Promise.all([
-    fetchHNewsStories(),
-    fetchReutersStories(),
-    fetchTopMediumStories(),
+    fetchSiteItems(hnewsConfigs),
+    fetchSiteItems(reutersConfigs),
+    fetchSiteItems(topMediumConfigs)
   ]);
 
   results.forEach((list) => {
