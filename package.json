@@ -22,7 +22,7 @@
     "express-handlebars": "^3.0.0",
     "helmet": "^2.1.2",
     "method-override": "^2.3.10",
-    "morgan": "^1.7.0",
+    "morgan": "^1.9.1",
     "request": "*",
     "request-promise": "^4.2.2",
     "serve-favicon": "^2.3.0",
