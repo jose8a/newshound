@@ -37,6 +37,8 @@ module.exports = async function(siteItemParserConfigs) {
   // orchestrate the actual parsing on the site
   let siteCollectionParser = Object.create(collectionParser);
 
+  // TODO: add try/catch block around the AWAIT call
+
   await rp(siteUrl, function (error, response, html) {
     if (!error && response.statusCode == 200) {
       siteCollectionParser.init(html, siteItemParser);
